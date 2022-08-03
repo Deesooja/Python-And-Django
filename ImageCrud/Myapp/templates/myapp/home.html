@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'enroll/css/bootstrap.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <div class="container">
+        <div class="py-5 text-center bg-secondary text-white">
+            <h1 class="mb-3">Upload Image</h1>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="image" id="image">
+                <input type="submit"  class="btn btn-danger value="Upload">
+            </form>
+        </div>
+        <div class="row">
+            {% if img %}
+            {% for image in img %}
+            <div class="col-sm-4">
+                <div class="card m-2">
+                    <img src="{{image.photo.url}}" alt="" class="card-img-top" height="200px">
+                    <div class="card-footer">
+                        <small class="text-muted">{{image.date}}</small>
+                    </div>
+                   </div>
+
+            </div>
+            
+            {% endfor %}
+            
+            {% endif %}
+            
+               
+
+               
+            </div>
+        </div>
+
+        
+        
+    </div> 
+
+
+
+
+
+
+    {% comment %} <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" id="image">
+        <input type="submit"  class="btn btn-danger value="Upload">
+    </form> 
+    {% if img.photo %} 
+     {% for image in img %}
+      <div class="images">
+        {{ image.id}}
+        {{ image.date}}
+        <img src="{{ image.photo.url }}" alt="images">
+      </div>
+     {% endfor %} 
+     {% endif %}  {% endcomment %}
+    <script src="{% static 'enroll/js/jquery.js' %}"></script>
+    <script src="{% static 'enroll/js/popper.js' %}"></script>
+    <script src="{% static 'enroll/js/bootstrap.js' %}"></script>
+   
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'student/base.html' %}
+{% block allcontain %}
+<div class="row">
+   <h4 class="alert alert-info">Update Student Information</h4>
+    <div class="col-sm-8 offset-2">
+         <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" name="submit" value="Update" class="btn btn-success">
+         </form>
+         <a href="{% url 'showdata' %}"><button class="btn btn-info mt-2">Home</button></a>
+
+    </div>
+</div>
+
+
+{% endblock allcontain %}
+
+
+ {% comment %} <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="submit" value="Update">
+        <a href="{% url 'showdata' %}"><button>Home</button></a>
+    </form>
+    <a href="{% url 'showdata' %}"><button>Home</button></a>
+
+</body>
+</html> {% endcomment %}

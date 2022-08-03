@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'todo_aap/css/bootstrap.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 mt-3">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" name="submit" value="TODO" class="btn btn-warning">
+                </form>
+                <table class="table table-hover mt-2" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>TODO</th>
+                            <th>Delete</th>
+                            <th>Done</th>
+            
+                        </tr>
+            
+                    </thead>
+                    {% for data in retrive_data %}
+                    <tbody>
+                        <tr>
+                            <td>{{data.id}}</td>
+                            <td>{{data.todo}}</td>
+                            <td><a href="{% url 'delete' data.id %}"><button class="btn btn-danger ">Delete</button></a></td>
+                            <td><a href="{% url 'done' data.id %}"><button class="btn btn-success">Done</button></a></td>
+                        </tr>
+                        
+                    </tbody>
+                    
+                    {% endfor %}
+                    
+                </table>
+
+            </div>
+            {% comment %}--------------------------  TODO DONE----------------- {% endcomment %}
+            <div class="col-sm-6 offset-1"> 
+                <h1>Done TODO list</h1>
+               <table class="table table-hover mt-3">
+              <thead>
+             <tr>
+                <th>ID</th>
+                <th>TODO</th>
+                <th>Status</th>
+             </tr>
+              </thead>
+                {% for done_data in done_data %}
+              <tbody>
+               <tr>
+                <td>{{done_data.id}}</td>
+                <td>{{done_data.todo}}</td>
+                <td class="text-success ">{{done_data.status}}</td>
+              </tr>
+
+             </tbody>
+        
+             {% endfor %}
+               </table>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    {% comment %} ---------------------------------------------END---------------------------------------------------------- {% endcomment %}
+    {% comment %} <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" name="submit" value="Submit">
+    </form>
+    {% if retrive_data %}
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>TODO</th>
+                <th>Delete</th>
+                <th>Done</th>
+
+            </tr>
+
+        </thead>
+        {% for data in retrive_data %}
+        <tbody>
+            <tr>
+                <td>{{data.id}}</td>
+                <td>{{data.todo}}</td>
+                <td><a href="{% url 'delete' data.id %}"><button>Delete</button></a></td>
+                <td><a href="{% url 'done' data.id %}"><button>Done</button></a></td>
+            </tr>
+            
+        </tbody>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% if done_data %}
+    <hr>
+    <h1>Done TODO list</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TODO</th>
+                <th>Status</th>
+            </tr>
+
+        </thead>
+        {% for done_data in done_data %}
+        <tbody>
+            <tr>
+                <td>{{done_data.id}}</td>
+                <td>{{done_data.todo}}</td>
+                <td>{{done_data.status}}</td>
+            </tr>
+
+        </tbody>
+        
+        {% endfor %}
+    </table>
+    {% endif %} {% endcomment %}
+
+ <script src="{% static 'enroll/js/jquery.js' %}"></script>
+ <script src="{% static 'enroll/js/popper.js' %}"></script>
+ <script src="{% static 'enroll/js/bootstrap.js' %}"></script>
+</body>
+</html>

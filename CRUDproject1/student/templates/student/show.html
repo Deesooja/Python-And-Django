@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends 'student/base.html' %}
+{% block allcontain %}
+<div class="row">
+    <div class="col-sm-4">
+     <h4 class="text-center alert alert-info">Add New Student</h4>
+     <form action="{% url 'insertdata' %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-success" value="Add">
+    </form>
+    </div>
+    <div class="col-sm-7 offset-1">
+  <h4 class="text-center alert alert-info">Show Student Information</h4>
+
+        {% if retrivedata_key %}
+     <table class="table table-hover">
+        <tr>
+          <th>ID</th>
+          <th>Nmae</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Edit</th>
+          <th>Delete</th>
+
+        </tr>
+        {% for out in retrivedata_key %}
+        <tr>
+            <td>{{out.id}}</td>
+            <td>{{out.name}}</td>
+            <td>{{out.email}}</td>
+            <td>{{out.address}}</td>
+            <td><a href="{% url 'updatedata' out.id %}"><button class="btn btn-secondary btn-sm" >Edit</button></a></td>
+            <td><a href="{%url 'deletedata' out.id %}"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+        </tr>
+        {% endfor %}
+        
+    
+     </table>
+   
+
+    {% endif %}
+
+    </div>
+</div>
+
+
+{% endblock allcontain %}
+{% comment %} {% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{% static 'student/css/style.css' %}"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'insertdata' %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="submit" value="Add">
+    </form>
+     
+    <hr>
+    {% if retrivedata_key %}
+     <table id="customers">
+        <tr>
+          <th>ID</th>
+          <th>Nmae</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Edit</th>
+          <th>Delete</th>
+
+        </tr>
+        {% for out in retrivedata_key %}
+        <tr>
+            <td>{{out.id}}</td>
+            <td>{{out.name}}</td>
+            <td>{{out.email}}</td>
+            <td>{{out.password}}</td>
+            <td><a href="{% url 'updatedata' out.id %}"><button>Edit</button></a></td>
+            <td><a href="{%url 'deletedata' out.id %}"><button>Delete</button></a></td>
+        </tr>
+        {% endfor %}
+        
+    
+     </table>
+   
+
+    {% endif %}
+    
+</body>
+</html> {% endcomment %}
